@@ -17,6 +17,16 @@ public class LRUCacheMain {
             this.key = key;
             this.value = value;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", pre=" + (pre != null ? pre : "") +
+                    ", next=" + (next != null ? next : "") +
+                    '}';
+        }
     }
 
     static class LRUCache {
@@ -24,6 +34,10 @@ public class LRUCacheMain {
         LinkedHashMap<Integer, Node> map = new LinkedHashMap<Integer, Node>();
         Node head=null;
         Node end=null;
+
+        public void print() {
+            System.out.println(map);
+        }
 
         public LRUCache(int capacity) {
             this.capacity = capacity;
@@ -106,9 +120,13 @@ public class LRUCacheMain {
     public static void main(String[] args) {
         LRUCache cache = new LRUCache(10);
 
-        cache.add(5,3);
-        cache.add(1,2);
-        System.out.println(cache.get(5));
+        cache.add(1,3);
+        cache.add(2,2);
+        cache.add(3,2);
+
+        cache.print();
+        cache.get(2);
+        cache.print();
         cache.evict();
         System.out.println(cache.remove(1));
         System.out.println(cache.get(1));
